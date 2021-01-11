@@ -8,15 +8,28 @@ import time
 # CORE
 
 class CallCount:
-    """Decorator counting the number of times a function is called."""
+    """Decorator counting the number of times a function is called.
 
-    def __init__(self, func):
-        self.func = func
+    Attributes:
+        function: Callable wrapped.
+        count: Number of times function has been called.
+
+    """
+
+    def __init__(self, function):
+        """Construct a CallCount instance.
+
+        Args:
+            function: Callable to wrap.
+
+        """
+        self.function = function
         self.count = 0
 
     def __call__(self, *args, **kwargs):
+        """Call wrapped function."""
         self.count += 1
-        return self.func(*args, **kwargs)
+        return self.function(*args, **kwargs)
 
     def reset_count(self):
         """Reset the function call count to zero."""
@@ -42,7 +55,7 @@ def time_function(function, runs=1, average=min):
     """Test the average execution time of a given function.
 
     Args:
-        function: Function to time.
+        function: Callable to time.
         runs (int, optional): Number of runs. Defaults to 1.
         average (optional): Average function to apply. Defaults to min.
 
@@ -89,7 +102,7 @@ def linear_search_iterative(array, value):
         value: Value to query presence of.
 
     Returns:
-        [bool]: True if value is in array, False otherwise.
+        True if value is in array, False otherwise.
 
     """
     for elt in array:
@@ -107,7 +120,7 @@ def linear_search_recursive(array, value):
         value: Value to query presence of.
 
     Returns:
-        [bool]: True if value is in array, False otherwise.
+        True if value is in array, False otherwise.
 
     """
     # Base case for empty list
@@ -130,7 +143,7 @@ def binary_search_recursive(array, value):
         value: Value to query presence of.
 
     Returns:
-        [bool]: True if value is in array, False otherwise.
+        True if value is in array, False otherwise.
 
     """
     # Base cases for empty or singular list
