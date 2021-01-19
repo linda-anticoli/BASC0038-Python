@@ -203,18 +203,48 @@ def selection_sort(array):
 
     """
     n = len(array)
-    sorted = array.copy()
-    for i in range(n):
+    result = array.copy()
+    for i in range(n - 1):
         # Find next-smallest value
         smallest = i
         for j in range(i + 1, n):
-            if compare(sorted[j], sorted[smallest]) < 0:
+            if compare(result[j], result[smallest]) < 0:
                 smallest = j
         # Swap next-smallest value into position
         if i != smallest:
-            sorted[i], sorted[smallest] = sorted[smallest], sorted[i]
+            result[i], result[smallest] = result[smallest], result[i]
 
-    return sorted
+    return result
+
+
+def selection_sort_recursive(array):
+    """Sort a list via recursive selection sort.
+
+    Args:
+        array: Unsorted list.
+
+    Returns:
+        A new list containing all elements in array, sorted.
+
+    """
+    # Base case for empty or singular list
+    n = len(array)
+    if n < 2:
+        return array
+
+    # Find smallest value
+    result = array.copy()
+    smallest = 0
+    for i in range(1, n):
+        if compare(result[i], result[smallest]) < 0:
+            smallest = i
+
+    # Swap smallest into first position
+    if smallest != 0:
+        result[0], result[smallest] = result[smallest], result[0]
+
+    # Recur on remainder of array
+    return [result[0]] + selection_sort_recursive(result[1:])
 
 
 def insertion_sort(array):
@@ -228,16 +258,16 @@ def insertion_sort(array):
 
     """
     n = len(array)
-    sorted = array.copy()
+    result = array.copy()
 
     # Swap each value backwards until in correct position
     for i in range(1, n):
         j = i
-        while j > 0 and compare(sorted[j], sorted[j - 1]) < 0:
-            sorted[j], sorted[j - 1] = sorted[j - 1], sorted[j]
+        while j > 0 and compare(result[j], result[j - 1]) < 0:
+            result[j], result[j - 1] = result[j - 1], result[j]
             j -= 1
 
-    return sorted
+    return result
 
 
 def merge(a, b):
