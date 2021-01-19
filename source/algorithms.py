@@ -270,6 +270,33 @@ def insertion_sort(array):
     return result
 
 
+def insertion_sort_recursive(array):
+    """Sort a list via recursive insertion sort.
+
+    Args:
+        array: Unsorted list.
+
+    Returns:
+        A new list containing all elements in array, sorted.
+
+    """
+    # Base case for empty or singular list
+    n = len(array)
+    if n < 2:
+        return array
+
+    # Recursive case is last element to insert appended to sorted sub-list
+    result = insertion_sort_recursive(array[:-1]) + [array[-1]]
+
+    # Swap last value backwards until in correct position
+    i = n - 1
+    while i > 0 and compare(result[i], result[i - 1]) < 0:
+        result[i], result[i - 1] = result[i - 1], result[i]
+        i -= 1
+
+    return result
+
+
 def merge(a, b):
     """Merge two sorted lists into one.
 
