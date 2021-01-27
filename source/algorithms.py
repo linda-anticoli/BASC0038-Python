@@ -351,6 +351,90 @@ def mergesort_recursive(array):
         mergesort_recursive(array[mid:]))
 
 
+def mergesort_iterative(array):
+    """Sort a list via iterative (bottom-up) mergesort.
+
+    Args:
+        array: Unsorted list.
+
+    Returns:
+        A new list containing all elements in array, sorted.
+
+    """
+    n = len(array)
+    result = array.copy()
+
+    # Merge runs of length 1, 2, 4, 8, ...
+    length = 1
+    while length < n:
+        # Merge each pair of runs
+        for i in range(0, n, 2 * length):
+            mid = i + length
+            upper = i + 2 * length
+            result[i:upper] = merge(result[i:mid], result[mid:upper])
+        length *= 2
+
+    return result
+
+
+def mergesort_recursive_hybrid(array, threshold=37):
+    """Sort a list via hybrid recursive (top-down) mergesort.
+
+    Delegates to insertion sort when n is less than or equal to some threshold.
+
+    Args:
+        array: Unsorted list.
+        threshold (int, optional): Delegation threshold. Defaults to 37.
+
+    Returns:
+        A new list containing all elements in array, sorted.
+
+    """
+    # Base case delegates to insertion sort
+    n = len(array)
+    if n <= threshold:
+        return insertion_sort(array)
+
+    # Recur on two halves of array and merge results
+    mid = n // 2
+    return merge(
+        mergesort_recursive(array[:mid]),
+        mergesort_recursive(array[mid:]))
+
+
+def mergesort_iterative_hybrid(array, threshold=37):
+    """Sort a list via hybrid iterative (bottom-up) mergesort.
+
+    Delegates to insertion sort when n is less than or equal to some threshold.
+
+    Args:
+        array: Unsorted list.
+        threshold (int, optional): Delegation threshold. Defaults to 37.
+
+    Returns:
+        A new list containing all elements in array, sorted.
+
+    """
+    n = len(array)
+    result = array.copy()
+
+    # Initial insertion sort pass
+    for i in range(0, n, threshold):
+        result[i:i+threshold] = insertion_sort(result[i:i+threshold])
+
+    # Merge runs of length 2*threshold, 4*threshold, ...
+    length = 2 * threshold
+    while length < n:
+        # Merge each pair of runs
+        for i in range(0, n, 2 * length):
+            mid = i + length
+            upper = i + 2 * length
+            result[i:upper] = merge(result[i:mid], result[mid:upper])
+        length *= 2
+
+    return result
+
+
 # MISCELLANEA
 
 def pile_shuffle(array, n):
