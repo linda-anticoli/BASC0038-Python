@@ -1,0 +1,41 @@
+graph {
+
+    a [label="8"];
+    b [label="3"];
+    c [label="4"];
+    d [label="1"];
+    e [label="1"];
+    f [label="1"];
+    g [label="2"];
+    h [label="0"];
+    i [label="0"];
+    j [label="0"];
+    k [label="0"];
+    l [label="0"];
+    m [label="0"];
+    n [label="0"];
+    o [label="1"];
+
+    p [label="0"]
+    q [label="0"]
+
+	a--b;
+    a--c;
+
+    b--d;
+    b--e;
+    c--f;
+    c--g;
+
+    d--h;
+    d--i;
+    e--j;
+    e--k;
+    f--l;
+    f--m;
+    g--n;
+    g--o;
+
+    o--p;
+    o--q;
+}
