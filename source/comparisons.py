@@ -65,6 +65,10 @@ def main():
     # experiment(lambda n: mergesort_recursive([i for i in range(n)]),
     #            lambda n: n / 2 * math.log2(n))
 
+    # Quicksort (worst case)
+    # experiment(lambda n: quicksort([i for i in range(n)]),
+    #            lambda n: n * (n - 1) / 2)
+
 
 if __name__ == "__main__":
     main()

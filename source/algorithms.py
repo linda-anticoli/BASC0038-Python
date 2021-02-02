@@ -435,6 +435,55 @@ def mergesort_iterative_hybrid(array, threshold=37):
     return result
 
 
+def partition(array, low, high, pivot):
+    """Reorder elements in a list range such that a pivot separates them.
+
+    Args:
+        array: List of values to reorder.
+        low: Index representing start of range.
+        high: Index representing end of range.
+        pivot: Index of pivot value.
+
+    Returns:
+        New index of the given pivot value.
+
+    """
+    # Boundary between lower and upper partitions
+    i = low
+
+    # Compare every other element against pivot
+    for j in range(low, high + 1):
+        if j != pivot and compare(array[j], array[pivot]) < 0:
+            # Swap into lower partition and increment boundary
+            array[i], array[j] = array[j], array[i]
+            i += 1
+
+    # Swap pivot value into final position
+    array[i], array[pivot] = array[pivot], array[i]
+
+    return i
+
+
+def quicksort(array):
+    """Sort a list in-place via quicksort.
+
+    Args:
+        array: Unsorted list.
+
+    """
+    def qsort(array, low, high):
+        while low < high:
+            pivot = partition(array, low, high, high)
+            if pivot - low <= high - pivot:
+                qsort(array, low, pivot - 1)
+                low = pivot + 1
+            else:
+                qsort(array, pivot + 1, high)
+                high = pivot - 1
+
+    qsort(array, 0, len(array) - 1)
+
+
 # MISCELLANEA
 
 def pile_shuffle(array, n):
