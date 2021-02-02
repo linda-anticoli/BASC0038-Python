@@ -66,8 +66,12 @@ def main():
     #            lambda n: n / 2 * math.log2(n))
 
     # Quicksort (worst case)
-    # experiment(lambda n: quicksort([i for i in range(n)]),
+    # experiment(lambda n: quicksort([i for i in range(n)], False),
     #            lambda n: n * (n - 1) / 2)
+
+    # Quicksort (best case) (correct only for one less than powers of 2)
+    # experiment(lambda n: quicksort([i for i in range(n)]),
+    #            lambda n: n*math.log2(n+1) + math.log2(n+1) - 2*n)
 
 
 if __name__ == "__main__":

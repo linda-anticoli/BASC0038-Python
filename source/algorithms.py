@@ -464,16 +464,19 @@ def partition(array, low, high, pivot):
     return i
 
 
-def quicksort(array):
+def quicksort(array, middle=True):
     """Sort a list in-place via quicksort.
 
     Args:
         array: Unsorted list.
+        middle (bool, optional): If True, use the middle element as the pivot,
+        otherwise use the last element. Defaults to True.
 
     """
     def qsort(array, low, high):
         while low < high:
-            pivot = partition(array, low, high, high)
+            pivot = (low + high) // 2 if middle else high
+            pivot = partition(array, low, high, pivot)
             if pivot - low <= high - pivot:
                 qsort(array, low, pivot - 1)
                 low = pivot + 1
