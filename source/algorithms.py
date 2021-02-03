@@ -422,8 +422,8 @@ def mergesort_iterative_hybrid(array, threshold=37):
     for i in range(0, n, threshold):
         result[i:i+threshold] = insertion_sort(result[i:i+threshold])
 
-    # Merge runs of length 2*threshold, 4*threshold, ...
-    length = 2 * threshold
+    # Merge runs of length threshold, 2*threshold, ...
+    length = threshold
     while length < n:
         # Merge each pair of runs
         for i in range(0, n, 2 * length):
