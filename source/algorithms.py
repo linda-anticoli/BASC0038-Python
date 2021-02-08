@@ -190,7 +190,7 @@ def binary_search_iterative(array, value):
     return False
 
 
-# SORTING ALGORITHMS
+# POLYNOMIAL-TIME SORT ALGORITHMS
 
 def selection_sort(array):
     """Sort a list via selection sort.
@@ -296,6 +296,8 @@ def insertion_sort_recursive(array):
 
     return result
 
+
+# MERGE SORT ALGORITHMS
 
 def merge(a, b):
     """Merge two sorted lists into one.
@@ -435,6 +437,8 @@ def mergesort_iterative_hybrid(array, threshold=37):
     return result
 
 
+# PARTITION-EXCHANGE SORT ALGORITHMS
+
 def partition(array, low, high, pivot):
     """Reorder elements in a list range such that a pivot separates them.
 
@@ -485,6 +489,95 @@ def quicksort(array, middle=True):
                 high = pivot - 1
 
     qsort(array, 0, len(array) - 1)
+
+
+# HEAP-BASED SORT ALGORITHMS
+
+def sift_up(heap, start, end):
+    """Sift-up the last node (end-1) in the given max heap.
+
+    Args:
+        heap: List containing heap.
+        start: Start of range of heap in list.
+        end: End of range of heap in list.
+
+    """
+    # Swap last node with parents until no longer greater.
+    i = end - 1
+    heaped = False
+    while i > start and not heaped:
+        parent = (i - 1) // 2
+        if compare(heap[i], heap[parent]) > 0:
+            heap[i], heap[parent] = heap[parent], heap[i]
+            i = parent
+        else:
+            heaped = True
+
+
+def sift_down(heap, start, end):
+    """Sift-down the first node (start) in the given max heap.
+
+    Args:
+        heap: List containing heap.
+        start: Start of range of heap in list.
+        end: End of range of heap in list.
+
+    """
+    # Swap first node with children until no longer smaller.
+    i = start
+    heaped = False
+    while not heaped:
+        left = i * 2 + 1
+        right = i * 2 + 2
+        largest = i
+
+        # Find largest of i, left and right
+        if left < end and compare(heap[left], heap[largest]) > 0:
+            largest = left
+        if right < end and compare(heap[right], heap[largest]) > 0:
+            largest = right
+
+        # If left or right is larger than i, swap and repeat
+        if largest == i:
+            heaped = True
+        else:
+            heap[i], heap[largest] = heap[largest], heap[i]
+            i = largest
+
+
+def heapify(array):
+    """Reorder a given array into a max heap.
+
+    Args:
+        array: List to heapify.
+
+    """
+    # Start by sifting down the first parent node
+    n = len(array)
+    node = (n - 2) // 2
+
+    # Sift down all nodes, finishing with the root
+    while node >= 0:
+        sift_down(array, node, n)
+        node -= 1
+
+
+def heapsort(array):
+    """Sort a list in-place via heapsort.
+
+    Args:
+        array: Unsorted list.
+
+    """
+    # Turn the entire array into a heap
+    heapify(array)
+
+    # Repeatedly extract the root from the heap into a sorted sublist
+    n = len(array)
+    while n > 1:
+        array[0], array[n - 1] = array[n - 1], array[0]
+        n -= 1
+        sift_down(array, 0, n)
 
 
 # MISCELLANEA

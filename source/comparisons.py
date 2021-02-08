@@ -73,6 +73,10 @@ def main():
     # experiment(lambda n: quicksort([i for i in range(n)]),
     #            lambda n: n*math.log2(n+1) + math.log2(n+1) - 2*n)
 
+    # Heapsort (worst case) - NON-TRIVIAL
+    # experiment(lambda n: heapsort([i for i in range(n)]),
+    #            lambda n: n + n*math.log2(n))
+
 
 if __name__ == "__main__":
     main()
