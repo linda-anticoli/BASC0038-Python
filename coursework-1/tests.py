@@ -90,6 +90,10 @@ class TestExercise3(unittest.TestCase):
     def test_reverse(self):
         orig, srtd = self._sort([24, 8, 4, 2, 1, 0, -1, -2, -4])
         self.assertEqual(srtd, sorted(orig))
+    
+    def test_reverse_big(self):
+        orig, srtd = self._sort([-i for i in range(300)])
+        self.assertEqual(srtd, sorted(orig))
 
 
 if __name__ == "__main__":
