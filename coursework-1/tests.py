@@ -60,8 +60,12 @@ class TestExercise2(unittest.TestCase):
         orig, srtd = self._sort([-4, -2, -1, 0, 1, 2, 4, 8, 24])
         self.assertEqual(srtd, orig)
 
-    def test_reverse(self):
+    def test_reverse_odd(self):
         orig, srtd = self._sort([24, 8, 4, 2, 1, 0, -1, -2, -4])
+        self.assertEqual(srtd, sorted(orig))
+
+    def test_reverse_even(self):
+        orig, srtd = self._sort([24, 8, 4, 2, 1, 0, -1, -2, -4, -8])
         self.assertEqual(srtd, sorted(orig))
 
 
